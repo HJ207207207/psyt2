@@ -64,10 +64,19 @@ function displayQuestion(index) {
         }
         
         optionDiv.addEventListener('click', (e) => {
-            if (e.target.tagName !== 'INPUT') {
-                optionDiv.querySelector('input').checked = true;
+            // INPUT 태그를 직접 클릭한 경우는 무시 (중복 실행 방지)
+            if (e.target.tagName === 'INPUT') {
+                return;
             }
+            optionDiv.querySelector('input').checked = true;
             selectOption(index, optionIndex);
+        });
+        
+        // 라디오 버튼의 change 이벤트 처리
+        optionDiv.querySelector('input').addEventListener('change', (e) => {
+            if (e.target.checked) {
+                selectOption(index, optionIndex);
+            }
         });
         
         optionsContainer.appendChild(optionDiv);
