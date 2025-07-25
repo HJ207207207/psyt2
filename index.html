@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>경기도의회 조직업무성향 검사 - 삼위일체 뇌 이론 기반</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 헤더 -->
+        <header class="main-header">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="images/gyeonggi-logo.png" alt="경기도의회" class="logo-img">
+                    <div class="logo-text">
+                        <h1>경기도의회</h1>
+                        <p>조직업무성향 검사</p>
+                    </div>
+                </div>
+                <div class="header-info">
+                    <span><i class="fas fa-brain"></i> 삼위일체 뇌 이론 기반</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- 시작 화면 -->
+        <div id="startScreen" class="screen active">
+            <div class="intro-section">
+                <h2 class="main-title">조직업무성향 검사</h2>
+                <p class="subtitle">삼위일체 뇌 이론을 기반으로 한 업무 성향 분석</p>
+                
+                <div class="intro-content">
+                    <div class="theory-explanation">
+                        <h3><i class="fas fa-info-circle"></i> 삼위일체 뇌 이론이란?</h3>
+                        <p>인간의 뇌가 진화 과정에서 3개의 층으로 발달했다는 이론으로, 각 층은 서로 다른 기능과 특성을 가지고 있습니다.</p>
+                        
+                        <div class="brain-types-preview">
+                            <div class="type-preview" style="border-color: #e74c3c;">
+                                <i class="fas fa-bolt"></i>
+                                <h4>뇌간형 (실행형)</h4>
+                                <p>본능적 · 즉각적 · 행동 중심</p>
+                            </div>
+                            <div class="type-preview" style="border-color: #3498db;">
+                                <i class="fas fa-heart"></i>
+                                <h4>구피질형 (관계형)</h4>
+                                <p>감정적 · 사회적 · 협력 중심</p>
+                            </div>
+                            <div class="type-preview" style="border-color: #2ecc71;">
+                                <i class="fas fa-brain"></i>
+                                <h4>신피질형 (분석형)</h4>
+                                <p>논리적 · 계획적 · 사고 중심</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="test-info">
+                        <h3><i class="fas fa-clipboard-check"></i> 검사 안내</h3>
+                        <ul>
+                            <li><i class="fas fa-clock"></i> 소요 시간: 약 5-10분</li>
+                            <li><i class="fas fa-list-ol"></i> 문항 수: 20문항</li>
+                            <li><i class="fas fa-user-check"></i> 대상: 경기도의회 직원</li>
+                            <li><i class="fas fa-shield-alt"></i> 개인정보: 수집하지 않음</li>
+                        </ul>
+                        
+                        <div class="notice">
+                            <p><strong>주의사항:</strong> 정답이 없으므로 평소 업무 스타일에 가장 가까운 답변을 선택해 주세요.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <button id="startBtn" class="btn btn-primary btn-large">
+                    <i class="fas fa-play"></i> 검사 시작하기
+                </button>
+            </div>
+        </div>
+
+        <!-- 검사 화면 -->
+        <div id="testScreen" class="screen">
+            <div class="test-section">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                    <span class="progress-text" id="progressText">1 / 20</span>
+                </div>
+                
+                <div class="question-container">
+                    <h3 id="questionNumber" class="question-number">문항 1</h3>
+                    <p id="questionText" class="question-text"></p>
+                    
+                    <div id="optionsContainer" class="options-container">
+                        <!-- 선택지가 동적으로 생성됩니다 -->
+                    </div>
+                </div>
+                
+                <div class="navigation-buttons">
+                    <button id="prevBtn" class="btn btn-secondary" disabled>
+                        <i class="fas fa-arrow-left"></i> 이전
+                    </button>
+                    <button id="nextBtn" class="btn btn-primary" disabled>
+                        다음 <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 결과 화면 -->
+        <div id="resultScreen" class="screen">
+            <div class="result-section">
+                <h2 class="result-title">검사 결과</h2>
+                
+                <div class="result-chart">
+                    <canvas id="resultChart" width="400" height="300"></canvas>
+                </div>
+                
+                <div class="result-type" id="resultType">
+                    <h3 id="typeName"></h3>
+                    <h4 id="typeTitle"></h4>
+                </div>
+                
+                <div class="result-scores" id="resultScores">
+                    <div class="score-item">
+                        <span class="score-label">뇌간형 (실행형)</span>
+                        <div class="score-bar">
+                            <div class="score-fill" id="scoreR" style="background-color: #e74c3c;"></div>
+                        </div>
+                        <span class="score-value" id="scoreRValue">0%</span>
+                    </div>
+                    <div class="score-item">
+                        <span class="score-label">구피질형 (관계형)</span>
+                        <div class="score-bar">
+                            <div class="score-fill" id="scoreL" style="background-color: #3498db;"></div>
+                        </div>
+                        <span class="score-value" id="scoreLValue">0%</span>
+                    </div>
+                    <div class="score-item">
+                        <span class="score-label">신피질형 (분석형)</span>
+                        <div class="score-bar">
+                            <div class="score-fill" id="scoreN" style="background-color: #2ecc71;"></div>
+                        </div>
+                        <span class="score-value" id="scoreNValue">0%</span>
+                    </div>
+                </div>
+                
+                <div class="result-description" id="resultDescription">
+                    <!-- 결과 설명이 동적으로 삽입됩니다 -->
+                </div>
+                
+                <div class="interaction-guide" id="interactionGuide">
+                    <!-- 상호작용 가이드가 동적으로 삽입됩니다 -->
+                </div>
+                
+                <div class="result-actions">
+                    <button id="printBtn" class="btn btn-secondary">
+                        <i class="fas fa-print"></i> 결과 인쇄
+                    </button>
+                    <button id="restartBtn" class="btn btn-primary">
+                        <i class="fas fa-redo"></i> 다시 검사하기
+                    </button>
+                </div>
+                
+                <div class="disclaimer">
+                    <p><small>※ 이 검사는 개인의 업무 성향을 이해하는 참고 자료이며, 절대적인 평가 도구가 아닙니다.</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="main-footer">
+        <p>&copy; 2025 경기도의회. 이 검사는 Paul MacLean의 삼위일체 뇌 이론을 기반으로 제작되었습니다.</p>
+    </footer>
+
+    <script src="js/questions.js"></script>
+    <script src="js/app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</body>
+</html>
